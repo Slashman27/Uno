@@ -1,0 +1,180 @@
+
+/**
+ * This is my own work.
+ * - Danny Nguyen
+ */
+
+import java.util.ArrayList;
+
+public class PlayerHand {
+
+	private ArrayList<Card> Hand = new ArrayList<Card>();
+
+	public PlayerHand() {
+	}
+
+	// add Card to PlayerHand
+	public Card draw(Card c) {
+		Hand.add(c);
+		return c;
+	}
+
+	// remove Card from PlayerHand
+	public Card play(int n) {
+		Card c = Hand.get(n);
+		Hand.remove(n);
+		return c;
+	}
+
+	// Comparing Cards
+	public boolean cardMatch(Card c) {
+		for (int n = 0; n < Hand.size(); n++) {
+			if ((Hand.get(n).getColor().equals(c.getColor())) || (Hand.get(n).getRank().equals(c.getRank()))
+					|| (Hand.get(n).getColor().equals("W"))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Checking for Single Match
+	public boolean isMatch(Card c, int n) {
+		if ((Hand.get(n).getColor().equals(c.getColor())) || (Hand.get(n).getRank().equals(c.getRank()))
+				|| (Hand.get(n).getColor().equals("W"))) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Locating Index of Cards
+	public int findMatch(Card c) {
+		// Finding Same Color and "SK", "RV", or "2+" Card
+		for (int n = 0; n < Hand.size(); n++) {
+			if (Hand.get(n).getColor().equals(c.getColor()) && (Hand.get(n).getRank().equals("SK")
+					|| Hand.get(n).getRank().equals("RV") || Hand.get(n).getRank().equals("2+"))) {
+				return n;
+			}
+		}
+		// Finding Different Color "SK", "RV", or "2+" Card
+		for (int n = 0; n < Hand.size(); n++) {
+			if ((Hand.get(n).getRank().equals("SK") && c.getRank().equals("SK"))
+					|| (Hand.get(n).getRank().equals("RV") && c.getRank().equals("RV"))
+					|| (Hand.get(n).getRank().equals("2+") && c.getRank().equals("2+"))) {
+				return n;
+			}
+		}
+		// Finding Same Color
+		for (int n1 = 0; n1 < Hand.size(); n1++) {
+			if (Hand.get(n1).getColor().equals(c.getColor())) {
+				return n1;
+			}
+		}
+		// Finding Same Rank
+		for (int n11 = 0; n11 < Hand.size(); n11++) {
+			if (Hand.get(n11).getRank().equals(c.getRank())) {
+				return n11;
+			}
+		}
+		// Finding "Wild" Card
+		for (int n111 = 0; n111 < Hand.size(); n111++) {
+			if (Hand.get(n111).getRank().equals("Wild")) {
+				return n111;
+			}
+		}
+		// Finding "4+" Card
+		for (int n1111 = 0; n1111 < Hand.size(); n1111++) {
+			if (Hand.get(n1111).getRank().equals("4+")) {
+				return n1111;
+			}
+		}
+
+		return 0;
+
+	}
+
+	// Checking Colors
+	public boolean colorMatch(Card c) {
+		for (int n = 0; n < Hand.size(); n++) {
+			if ((Hand.get(n).getColor().equals(c.getColor()))) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Checking for Non-Wild
+	public boolean hasColor() {
+		for (int n = 0; n < Hand.size(); n++) {
+			if (Hand.get(n).getColor().equals("R") || Hand.get(n).getColor().equals("B")
+					|| Hand.get(n).getColor().equals("G") || Hand.get(n).getColor().equals("Y")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Checking for "2+"
+	public boolean canStack() {
+		for (int n = 0; n < Hand.size(); n++) {
+			if (Hand.get(n).getRank().equals("2+")) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	// Checking for Single Match "2+"
+	public boolean isStackable(Card c, int n) {
+		if (Hand.get(n).getRank().equals("2+")) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Finding Index of "2+"
+	public int findStack() {
+		for (int n = 0; n < Hand.size(); n++) {
+			if (Hand.get(n).getRank().equals("2+")) {
+				return n;
+			}
+		}
+		return 0;
+	}
+
+	// Return size
+	public int getSize() {
+		int s = Hand.size();
+		return s;
+	}
+
+	// Counting Points
+	public int tallyPoints() {
+		int p = 0;
+		for (int n = 0; n < Hand.size(); n++) {
+			p += Hand.get(n).getPoints();
+		}
+		return p;
+	}
+
+	// Determining UNO
+	public boolean uno() {
+		if (Hand.size() == 1) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	// Determining an empty Hand
+	public boolean isEmpty() {
+		return Hand.isEmpty();
+	}
+
+	@Override
+	public String toString() {
+		return "" + Hand + "";
+	}
+
+}
