@@ -1,0 +1,82 @@
+
+/**
+ * This is my own work.
+ * - Danny Nguyen
+ */
+
+import java.util.Random;
+
+public class Card {
+
+	private String Color;
+	private String Rank;
+	private int Points;
+
+	public Card() {
+	}
+
+	// Creating Cards
+	public Card(String c, String r, int p) {
+		Color = c;
+		Rank = r;
+		Points = p;
+	}
+
+	// Returning a Card's Color
+	public String getColor() {
+		return Color;
+	}
+
+	// Returning a Card's Rank
+	public String getRank() {
+		return Rank;
+	}
+
+	// Returning a Card's Points
+	public int getPoints() {
+		return Points;
+	}
+
+	// Setting the Color for a Card
+	public void setColor(String c, int k) {
+		int q = k;
+		if (q == 0) {
+			c = "R";
+		} else if (q == 1) {
+			c = "B";
+		} else if (q == 2) {
+			c = "G";
+		} else if (q == 3) {
+			c = "Y";
+		}
+		Color = c;
+	}
+
+	// Changing the Color for Wilds
+	public void setColorWild(String c) {
+		Random rnd = new Random();
+		int q = rnd.nextInt(4);
+		if (q == 0) {
+			c = "R";
+		} else if (q == 1) {
+			c = "B";
+		} else if (q == 2) {
+			c = "G";
+		} else if (q == 3) {
+			c = "Y";
+		}
+		Color = c;
+	}
+
+	// Changing Used Wilds back to Normal
+	public void resetWild(String c) {
+		c = "W";
+		Color = c;
+	}
+
+	@Override
+	public String toString() {
+		return "[" + Color + "-" + Rank + "]";
+	}
+
+}
