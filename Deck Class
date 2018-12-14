@@ -1,0 +1,96 @@
+
+/**
+ * This is my own work.
+ * - Danny Nguyen
+ */
+
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class Deck {
+
+	private ArrayList<Card> Main = new ArrayList<Card>();
+
+	private static String[] color = { "R", "B", "G", "Y", "W" };
+	private static String[] rank = { "0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "SK", "RV", "2+", "Wild", "4+" };
+	private static int[] points = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 20, 50 };
+
+	// Creating Deck
+	public Deck() {
+		// "0" Cards
+		for (int i = 0; i < 4; i++) {
+			Card c = new Card(color[i], rank[0], points[0]);
+			Main.add(c);
+		}
+		// "1" to "9" Cards
+		for (int k = 0; k < 2; k++) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 1; j < 10; j++) {
+					Card c = new Card(color[i], rank[j], points[j]);
+					Main.add(c);
+				}
+			}
+		}
+		// "SK" to "2+" Cards
+		for (int k = 0; k < 2; k++) {
+			for (int i = 0; i < 4; i++) {
+				for (int j = 10; j < 13; j++) {
+					Card c = new Card(color[i], rank[j], points[10]);
+					Main.add(c);
+				}
+			}
+		}
+		// Wild Cards
+		for (int i = 0; i < 4; i++) {
+			for (int j = 13; j < rank.length; j++) {
+				Card c = new Card(color[4], rank[j], points[11]);
+				Main.add(c);
+			}
+		}
+
+	}
+
+	// Determining an empty Deck
+	public boolean isEmpty() {
+		return Main.isEmpty();
+	}
+
+	// Clearing a Deck
+	public void clear() {
+		Main.clear();
+	}
+
+	// Shuffling Decks
+	public void shuffle() {
+		Collections.shuffle(Main);
+	}
+
+	// Dealing Cards
+	public Card cardDeal() {
+		Card c = Main.get(0);
+		Main.remove(0);
+		return c;
+	}
+
+	// Returning Size
+	public int getSize() {
+		int s = Main.size();
+		return s;
+	}
+
+	// Shuffle a Section
+	public void partialShuffle(int s) {
+		Collections.shuffle(Main.subList(s, getSize()));
+	}
+
+	// adding Cards to a Deck
+	public void addDeck(Card c) {
+		Main.add(c);
+	}
+
+	@Override
+	public String toString() {
+		return "" + Main + "";
+	}
+
+}
