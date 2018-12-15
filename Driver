@@ -63,7 +63,6 @@ public class Driver_04 {
 			System.out.println(name + ", you are Player " + (HN + 1));
 			System.out.println("Enter anything to continue.");
 			con = kb.next();
-			System.out.println();
 		}
 
 		// Creating Deck, Discard, and PlayerHands
@@ -121,8 +120,8 @@ public class Driver_04 {
 			for (int i = 0; i < PN; i++) {
 				System.out.println("P" + (i + 1) + ": " + Player.get(i));
 			}
+			System.out.println();
 		}
-		System.out.println();
 
 		// Calculating Starting Player
 		int sp = (CP + 1);
@@ -319,10 +318,9 @@ public class Driver_04 {
 			}
 			// end of Top Card Option: Base-Rule - Anything Goes
 		} // end of TCOs
-		if (HP == true) {
-			System.out.println("Enter anything to start game.");
-			con = kb.next();
-		}
+
+		System.out.println("Enter anything to start game.");
+		con = kb.next();
 		System.out.println();
 
 		// - Main Gameplay Loop -
@@ -387,11 +385,13 @@ public class Driver_04 {
 						p = (hcp - 1);
 						if (hcp < 1 || hcp > Player.get(CP).getSize()) {
 							System.out.println("That is not a Card. - Try Again");
+							System.out.println("The Top Card is " + TopCard);
 							System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
 							System.out.println(Player.get(CP));
 							hcp = kb.nextInt();
 						} else if (!(Player.get(CP).isMatch(TopCard, p))) {
 							System.out.println("You can't play that! - Try Again");
+							System.out.println("The Top Card is " + TopCard);
 							System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
 							System.out.println(Player.get(CP));
 							hcp = kb.nextInt();
@@ -538,11 +538,13 @@ public class Driver_04 {
 										s = (hcp - 1);
 										if (hcp < 1 || hcp > Player.get(CP).getSize()) {
 											System.out.println("That is not a Card. - Try Again");
+											System.out.println("You need to play a (2+) Card.");
 											System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
 											System.out.println(Player.get(CP));
 											hcp = kb.nextInt();
 										} else if (!(Player.get(CP).isStackable(TopCard, s))) {
 											System.out.println("You can't stack with that! - Try Again");
+											System.out.println("You need to play a (2+) Card.");
 											System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
 											System.out.println(Player.get(CP));
 											hcp = kb.nextInt();
@@ -723,6 +725,7 @@ public class Driver_04 {
 							}
 						}
 					}
+					int d4p = CP;
 					// Rotation of Player's Turns
 					if (TurnRotation % 2 == 0) {
 						CP--;
@@ -751,7 +754,7 @@ public class Driver_04 {
 							System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
 						}
 					}
-					if (HP == true && CP == HN) {
+					if (HP == true && d4p == HN) {
 						// Displaying New Color
 						if (TopCard.getColor().equals("R")) {
 							System.out.println(name + " chooses Red.");
@@ -765,13 +768,13 @@ public class Driver_04 {
 					} else {
 						// Displaying New Color
 						if (TopCard.getColor().equals("R")) {
-							System.out.println("Player " + (CP + 1) + " chooses Red.");
+							System.out.println("Player " + (d4p + 1) + " chooses Red.");
 						} else if (TopCard.getColor().equals("B")) {
-							System.out.println("Player " + (CP + 1) + " chooses Blue.");
+							System.out.println("Player " + (d4p + 1) + " chooses Blue.");
 						} else if (TopCard.getColor().equals("G")) {
-							System.out.println("Player " + (CP + 1) + " chooses Green.");
+							System.out.println("Player " + (d4p + 1) + " chooses Green.");
 						} else if (TopCard.getColor().equals("Y")) {
-							System.out.println("Player " + (CP + 1) + " chooses Yellow.");
+							System.out.println("Player " + (d4p + 1) + " chooses Yellow.");
 						}
 					}
 				}
