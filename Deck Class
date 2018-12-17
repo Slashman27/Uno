@@ -60,6 +60,26 @@ public class Deck {
 		Main.clear();
 	}
 
+	// Deck for Tutorial
+	public void testDeck() {
+		Card c = new Card(color[1], rank[10], points[10]);
+		Main.add(c);
+		c = new Card(color[0], rank[10], points[10]);
+		Main.add(c);
+		c = new Card(color[2], rank[4], points[4]);
+		Main.add(c);
+		c = new Card(color[1], rank[0], points[0]);
+		Main.add(c);
+		c = new Card(color[4], rank[13], points[11]);
+		Main.add(c);
+		c = new Card(color[3], rank[12], points[10]);
+		Main.add(c);
+		c = new Card(color[3], rank[5], points[5]);
+		Main.add(c);
+		c = new Card(color[2], rank[9], points[9]);
+		Main.add(c);
+	}
+
 	// Shuffling Decks
 	public void shuffle() {
 		Collections.shuffle(Main);
