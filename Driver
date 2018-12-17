@@ -17,6 +17,7 @@ public class Driver_04 {
 
 		// - Number of Players - |2 - 10|
 		int PN;
+		System.out.println("- Number of Players -");
 		System.out.println("Select the Number of Players: |2 - 10|");
 		PN = kb.nextInt();
 		while ((PN < 2 || PN > 10)) {
@@ -38,10 +39,18 @@ public class Driver_04 {
 		boolean winner = false;
 		String con = "";
 
+		// Result Screen Stuff
+		int SKp = 0;
+		int RVp = 0;
+		int D2p = 0;
+		int Wp = 0;
+		int D4p = 0;
+
 		// Optional: Adding a Human Player
 		boolean HP = false;
 		int ph;
 		int HN = rnd.nextInt(PN);
+		System.out.println("- Single-Player Mode -");
 		System.out.println("Would you like to play?");
 		System.out.println("Enter 0 for Yes\nEnter 1 for No");
 		ph = kb.nextInt();
@@ -65,28 +74,151 @@ public class Driver_04 {
 			con = kb.next();
 		}
 
-		// Creating Deck, Discard, and PlayerHands
+		// Tutorial
+		if (HP == true) {
+			boolean Tutorial = false;
+			int tl;
+			System.out.println("- Tutorial -");
+			System.out.println("Would you like to go through a tutorial?");
+			System.out.println("Enter 0 for Yes\nEnter 1 for No");
+			tl = kb.nextInt();
+			while (!(tl == 0 || tl == 1)) {
+				System.out.println("Please select a vaild option");
+				System.out.println("Enter 0 for Yes\nEnter 1 for No");
+				tl = kb.nextInt();
+			}
+			if (tl == 0) {
+				Tutorial = true;
+			} else if (tl == 1) {
+				Tutorial = false;
+			}
+			if (Tutorial == true) {
+				boolean First = false;
+				int ft;
+				System.out.println("Is this your first time playing UNO?");
+				System.out.println("Enter 0 for Yes\nEnter 1 for No");
+				ft = kb.nextInt();
+				while (!(ft == 0 || ft == 1)) {
+					System.out.println("Please select a vaild option");
+					System.out.println("Enter 0 for Yes\nEnter 1 for No");
+					ft = kb.nextInt();
+				}
+				if (ft == 0) {
+					First = true;
+				} else if (ft == 1) {
+					First = false;
+				}
+				if (First == true) {
+					System.out.println("- Goal of the Game -");
+					System.out.println(
+							"The goal of the game is to be the first Player to have zero cards in their hand.");
+					System.out.println("Enter anything to continue.");
+					con = kb.next();
+				}
+				// Tutorial: Card Edition
+				Deck td = new Deck();
+				td.clear();
+				td.testDeck();
+				Card CEX = td.cardDeal();
+				System.out.println("- Cards -");
+				System.out.println("This is a Card: " + CEX);
+				System.out.println("The First symbol represents the Card's Color.");
+				System.out.println("The Second symbol represents the Card's Rank.");
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+				if (First == true) {
+					System.out.println("There are 4 possible Colors: Red(R), Blue(B), Green(G), and Yellow(Y)");
+					System.out.println();
+					System.out.println("A Card's Rank can be split into 2 groups: Number Cards and Action Cards.");
+					System.out.println();
+					System.out
+							.println("Number Cards will have a number as their Rank: ranging from Zero(0) to Nine(9).");
+					System.out.println("Action Cards, when played, will have an additional effect:");
+					System.out.println();
+					System.out.println("A Skip Card(SK) will skip the next Player's turn.");
+					System.out.println("A Reverse Card(RV) will reverse the turn order.");
+					System.out.println("*In a 2-Player game, the Reverse Card acts like a Skip Card.");
+					System.out.println(
+							"A Draw 2 Card(2+) will force the next Player to draw 2 cards and lose their turn.");
+					System.out.println("A Wild Card(Wild) will let the Player choose the Color of the Card.");
+					System.out.println("A Wild Draw 4 Card(4+) will let the Player choose the Color of the Card\n"
+							+ "\tand will force the next Player to draw 4 cards and lose their turn.");
+					System.out.println();
+					System.out.println("Wild Cards can be played on top of any other card.");
+					System.out.println("Enter anything to continue.");
+					con = kb.next();
+				}
+				// Tutorial: Hand Edition
+				PlayerHand tph = new PlayerHand();
+				for (int i = 0; i < 7; i++) {
+					tph.draw(td.cardDeal());
+				}
+				System.out.println("- Hand -");
+				System.out.println("Below is an example of a hand.");
+				System.out.println(name + "'s hand: " + tph);
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+				// Tutorial: Playing Edition
+				System.out.println("- Playing Cards -");
+				System.out.println("During your turn, if capable, you will be prompted to play a card.");
+				System.out.println("EX. You can play a card. Choose a Card: |1 - 7|");
+				System.out.println();
+				System.out.println("The numbers represent the range of cards in your hand.");
+				System.out.println("You play a card by entering in the card's location in your hand.");
+				System.out.println(
+						"The first number being the leftmost card and\n\tthe second number being the rightmost card.");
+
+				if (First == true) {
+					System.out.println("*You can play a card if its Color or Rank matches, or if it is a Wild Card.");
+				}
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+			} // end of tutorial
+		}
+
+		// Creating Deck, Discard, PlayerHands, and Turn Count
 		Deck k = new Deck();
 		Deck Discard = new Deck();
 		Discard.clear();
 		ArrayList<PlayerHand> Player = new ArrayList<PlayerHand>();
+		int Turns[] = new int[PN];
+		int TTC = 0;
 		for (int i = 0; i < PN; i++) {
 			PlayerHand p = new PlayerHand();
 			Player.add(p);
+			Turns[i] = 0;
 			k.shuffle();
 		}
 
 		// - Choose to Stack "2+" Cards - |true or false|
-		boolean Stack = true;
+		boolean Stack = false;
 		int toStack;
 		if (PN > 2) {
-			System.out.println("Would you like to add an Extra Rule to stack Draw 2+ Cards?");
-			System.out.println("Enter 0 for Yes\nEnter 1 for No");
+			System.out.println("- Stacking -");
+			System.out.println("Would you like to add an Extra Rule to stack Draw 2 Cards?");
+			System.out.println("Enter 0 for Yes\nEnter 1 for No\nEnter 2 for Explanation");
 			toStack = kb.nextInt();
-			while (!(toStack == 0 || toStack == 1)) {
+			while (!(toStack == 0 || toStack == 1 || toStack == 2)) {
 				System.out.println("Please select a vaild option");
+				System.out.println("Enter 0 for Yes\nEnter 1 for No\nEnter 2 for Explanation");
+				toStack = kb.nextInt();
+			}
+			if (toStack == 2) {
+				System.out.println("How stacking works is whenever a Player plays a Draw 2 Card(2+),\n"
+						+ "\tthe next Player can also play a Draw 2 Card to avoid drawing any cards.");
+				System.out.println("If the next Player does not have a Draw 2 Card, they then must draw cards\n"
+						+ "\tbased on the number of Draw 2 Cards played.");
+				System.out.println("*Three Draw 2 Cards equal to Six(6) cards drawn.");
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+				System.out.println("Would you like to add an Extra Rule to stack Draw 2 Cards?");
 				System.out.println("Enter 0 for Yes\nEnter 1 for No");
 				toStack = kb.nextInt();
+				while (!(toStack == 0 || toStack == 1)) {
+					System.out.println("Please select a vaild option");
+					System.out.println("Enter 0 for Yes\nEnter 1 for No");
+					toStack = kb.nextInt();
+				}
 			}
 			if (toStack == 0) {
 				Stack = true;
@@ -112,7 +244,6 @@ public class Driver_04 {
 		if (HP == true) {
 			System.out.println("This is your Starting Hand:");
 			System.out.println(name + "'s: " + Player.get(HN));
-			System.out.println("The leftmost Card is Number 1");
 			System.out.println("Enter anything to continue.");
 			con = kb.next();
 		} else {
@@ -134,15 +265,29 @@ public class Driver_04 {
 
 		// - Choose ONE Top Card Option - |0 or 1|
 		int TCO;
+		System.out.println("- Top Card Selection -");
 		System.out.println("Select how to draw the first Top Card");
 		System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
 		System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
+		System.out.println("Enter 2 for Explanation");
 		TCO = kb.nextInt();
-		while (!(TCO == 0 || TCO == 1)) {
-			System.out.println("Please select a vaild option");
+		if (TCO == 2) {
+			System.out.println("Here you will be deciding how the first Top Card is drawn.");
+			System.out.println("The Home-Rule Option(0) draws until the first Top Card is a number card.");
+			System.out.println(
+					"The Base-Rule Option(1) draws the first Top Card\n" + "\tand applies any effects if necessary.");
+			System.out.println("Enter anything to continue.");
+			con = kb.next();
+			System.out.println("Select how to draw the first Top Card");
 			System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
 			System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
 			TCO = kb.nextInt();
+			while (!(TCO == 0 || TCO == 1)) {
+				System.out.println("Please select a vaild option");
+				System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
+				System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
+				TCO = kb.nextInt();
+			}
 		}
 		if (TCO == 0) {
 			// Top Card Option (0): Home-Rule - No Action Cards
@@ -344,17 +489,20 @@ public class Driver_04 {
 
 			// Displaying Player's Turn and Hand, and the Top Card
 			if (HP == true && CP == HN) {
-				System.out.println("-" + name + "'s Turn-");
+				System.out.println("- " + name + "'s Turn -");
 				System.out.println("The Top Card is " + TopCard);
 				System.out.println(name + "'s hand: " + Player.get(CP));
 			} else if (HP == true) {
-				System.out.println("-Player " + (CP + 1) + "'s Turn-");
+				System.out.println("- Player " + (CP + 1) + "'s Turn -");
 				System.out.println("The Top Card is " + TopCard);
 			} else {
-				System.out.println("-Player " + (CP + 1) + "'s Turn-");
+				System.out.println("- Player " + (CP + 1) + "'s Turn -");
 				System.out.println("The Top Card is " + TopCard);
 				System.out.println("P" + (CP + 1) + "'s hand: " + Player.get(CP));
 			}
+
+			// Increasing Turn Count
+			TTC++;
 
 			// - Player's Turn -
 			// Player draws Card if needed
@@ -400,6 +548,7 @@ public class Driver_04 {
 							TopCard = Player.get(CP).play(p);
 							System.out.println("You played " + TopCard);
 							playable = true;
+							Turns[CP] += 1;
 						}
 					}
 				} else {
@@ -407,6 +556,7 @@ public class Driver_04 {
 					Discard.addDeck(TopCard);
 					TopCard = Player.get(CP).play(p);
 					System.out.println("Player " + (CP + 1) + " played " + TopCard);
+					Turns[CP] += 1;
 				}
 
 				// If Player Has UNO
@@ -479,6 +629,7 @@ public class Driver_04 {
 					} else {
 						System.out.println("Player " + (CP + 1) + "'s Turn is Skipped.");
 					}
+					SKp++;
 				}
 				// Reverse Card
 				else if (TopCard.getRank().equals("RV")) {
@@ -500,9 +651,11 @@ public class Driver_04 {
 						} else {
 							System.out.println("Player " + (CP + 1) + "'s Turn is Skipped.");
 						}
+						RVp++;
 					} else {
 						TurnRotation++;
 						System.out.println("Turn Order has been Reversed.");
+						RVp++;
 					}
 				}
 				// Draw 2+ Card
@@ -521,7 +674,7 @@ public class Driver_04 {
 					}
 					int dn = 2;
 					// Optional: Home-Rule - Stacking "2+" Cards
-					if (Stack == true && PN > 2) {
+					if (Stack == true) {
 						int sb = (CP - 1);
 						if (sb < 0) {
 							sb = (PN - 1);
@@ -548,11 +701,12 @@ public class Driver_04 {
 											System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
 											System.out.println(Player.get(CP));
 											hcp = kb.nextInt();
-										} else {
+										} else if (Player.get(CP).isStackable(TopCard, s)) {
 											Discard.addDeck(TopCard);
 											TopCard = Player.get(CP).play(s);
 											System.out.println("You stacked with " + TopCard);
 											playable = true;
+											Turns[CP] += 1;
 										}
 									}
 								} else {
@@ -560,6 +714,7 @@ public class Driver_04 {
 									Discard.addDeck(TopCard);
 									TopCard = Player.get(CP).play(s);
 									System.out.println("Player " + (CP + 1) + " stacks with " + TopCard);
+									Turns[CP] += 1;
 								}
 								// If Player Has UNO
 								if (Player.get(CP).uno() == true) {
@@ -655,6 +810,7 @@ public class Driver_04 {
 							k.shuffle();
 						}
 					}
+					D2p++;
 				}
 				// Wild Card
 				else if (TopCard.getRank().equals("Wild")) {
@@ -700,6 +856,7 @@ public class Driver_04 {
 							System.out.println("Player " + (CP + 1) + " chooses Yellow.");
 						}
 					}
+					Wp++;
 				}
 				// Draw 4+ Wild Card
 				else if (TopCard.getRank().equals("4+")) {
@@ -777,6 +934,7 @@ public class Driver_04 {
 							System.out.println("Player " + (d4p + 1) + " chooses Yellow.");
 						}
 					}
+					D4p++;
 				}
 			} else {
 				if (HP == true && CP == HN) {
@@ -784,6 +942,7 @@ public class Driver_04 {
 				} else {
 					System.out.println("Player " + (CP + 1) + " could not play.");
 				}
+				Turns[CP] += 1;
 			} // end of Player has match
 			System.out.println();
 			// Reset Draw Pile
@@ -823,6 +982,7 @@ public class Driver_04 {
 			// Displaying Winner and Points earned
 		kb.close();
 		int tp = 0;
+		int tc = 0;
 		for (int i = 0; i < PN; i++) {
 			if (Player.get(i).isEmpty() == true) {
 				if (HP == true && i == HN) {
@@ -830,11 +990,20 @@ public class Driver_04 {
 				} else {
 					System.out.println("Player " + (i + 1) + " has Won");
 				}
+				tc = Turns[i];
 			} else {
 				tp += Player.get(i).tallyPoints();
 			}
 		}
-		System.out.println("with " + tp + " Points!");
+		System.out.println("with " + tp + " Points");
+		System.out.println("and played " + tc + " times.");
+		System.out.println();
+		System.out.println("Total Turns Players Played: " + TTC);
+		System.out.println("Total Number of Skips Played: " + SKp);
+		System.out.println("Total Number of Reverses Played: " + RVp);
+		System.out.println("Total Number of Draw 2s Played: " + D2p);
+		System.out.println("Total Number of Wilds Played: " + Wp);
+		System.out.println("Total Number of Wild Draw 4s Played: " + D4p);
 	} // end of main
 
 }
