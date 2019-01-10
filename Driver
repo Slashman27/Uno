@@ -8,336 +8,321 @@ import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
 
-public class Driver_04 {
+public class Driver_05 {
 
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
 		Scanner kb = new Scanner(System.in);
-
-		// - Number of Players - |2 - 10|
-		int PN;
-		System.out.println("- Number of Players -");
-		System.out.println("Select the Number of Players: |2 - 10|");
-		PN = kb.nextInt();
-		while ((PN < 2 || PN > 10)) {
-			if (PN < 2) {
-				System.out.println("Not Enough Players - Try Again");
-				System.out.println("Select the Number of Players: |2 - 10|");
-				PN = kb.nextInt();
-			} else if (PN > 10) {
-				System.out.println("Too Many Players - Try Again");
-				System.out.println("Select the Number of Players: |2 - 10|");
-				PN = kb.nextInt();
+		boolean Reset = true;
+		while (Reset) {
+			// - Number of Players - |2 - 10|
+			int PN;
+			System.out.println("- Number of Players -");
+			System.out.println("Select the Number of Players: |2 - 10|");
+			PN = kb.nextInt();
+			while ((PN < 2 || PN > 10)) {
+				if (PN < 2) {
+					System.out.println("Not Enough Players - Try Again");
+					System.out.println("Select the Number of Players: |2 - 10|");
+					PN = kb.nextInt();
+				} else if (PN > 10) {
+					System.out.println("Too Many Players - Try Again");
+					System.out.println("Select the Number of Players: |2 - 10|");
+					PN = kb.nextInt();
+				}
 			}
-		}
 
-		// Set-up
-		Random rnd = new Random();
-		int CP = rnd.nextInt(PN);
-		int TurnRotation = 1;
-		boolean winner = false;
-		String con = "";
+			// Set-up
+			Random rnd = new Random();
+			int CP = rnd.nextInt(PN);
+			int TurnRotation = 1;
+			boolean winner = false;
+			String con = "";
+			if (!(con.equals(""))) {
 
-		// Result Screen Stuff
-		int SKp = 0;
-		int RVp = 0;
-		int D2p = 0;
-		int Wp = 0;
-		int D4p = 0;
+			}
 
-		// Optional: Adding a Human Player
-		boolean HP = false;
-		int ph;
-		int HN = rnd.nextInt(PN);
-		System.out.println("- Single-Player Mode -");
-		System.out.println("Would you like to play?");
-		System.out.println("Enter 0 for Yes\nEnter 1 for No");
-		ph = kb.nextInt();
-		while (!(ph == 0 || ph == 1)) {
-			System.out.println("Please select a vaild option");
+			// Result Screen Stuff
+			int SKp = 0;
+			int RVp = 0;
+			int D2p = 0;
+			int Wp = 0;
+			int D4p = 0;
+
+			// Optional: Adding a Human Player
+			boolean HP = false;
+			int ph;
+			int HN = rnd.nextInt(PN);
+			System.out.println("- Single-Player Mode -");
+			System.out.println("Would you like to play?");
 			System.out.println("Enter 0 for Yes\nEnter 1 for No");
 			ph = kb.nextInt();
-		}
-		if (ph == 0) {
-			HP = true;
-		} else if (ph == 1) {
-			HP = false;
-		}
-		// Entering a name
-		String name = "";
-		if (HP == true) {
-			System.out.println("Enter a name:");
-			name = kb.next();
-			System.out.println(name + ", you are Player " + (HN + 1));
-			System.out.println("Enter anything to continue.");
-			con = kb.next();
-		}
-
-		// Tutorial
-		if (HP == true) {
-			boolean Tutorial = false;
-			int tl;
-			System.out.println("- Tutorial -");
-			System.out.println("Would you like to go through a tutorial?");
-			System.out.println("Enter 0 for Yes\nEnter 1 for No");
-			tl = kb.nextInt();
-			while (!(tl == 0 || tl == 1)) {
+			while (!(ph == 0 || ph == 1)) {
 				System.out.println("Please select a vaild option");
+				System.out.println("Enter 0 for Yes\nEnter 1 for No");
+				ph = kb.nextInt();
+			}
+			if (ph == 0) {
+				HP = true;
+			} else if (ph == 1) {
+				HP = false;
+			}
+			// Entering a name
+			String name = "";
+			if (HP == true) {
+				System.out.println("Enter a name:");
+				name = kb.next();
+				System.out.println(name + ", you are Player " + (HN + 1));
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+			}
+
+			// Tutorial
+			if (HP == true) {
+				boolean Tutorial = false;
+				int tl;
+				System.out.println("- Tutorial -");
+				System.out.println("Would you like to go through a tutorial?");
 				System.out.println("Enter 0 for Yes\nEnter 1 for No");
 				tl = kb.nextInt();
-			}
-			if (tl == 0) {
-				Tutorial = true;
-			} else if (tl == 1) {
-				Tutorial = false;
-			}
-			if (Tutorial == true) {
-				boolean First = false;
-				int ft;
-				System.out.println("Is this your first time playing UNO?");
-				System.out.println("Enter 0 for Yes\nEnter 1 for No");
-				ft = kb.nextInt();
-				while (!(ft == 0 || ft == 1)) {
+				while (!(tl == 0 || tl == 1)) {
 					System.out.println("Please select a vaild option");
+					System.out.println("Enter 0 for Yes\nEnter 1 for No");
+					tl = kb.nextInt();
+				}
+				if (tl == 0) {
+					Tutorial = true;
+				} else if (tl == 1) {
+					Tutorial = false;
+				}
+				if (Tutorial == true) {
+					boolean First = false;
+					int ft;
+					System.out.println("Is this your first time playing UNO?");
 					System.out.println("Enter 0 for Yes\nEnter 1 for No");
 					ft = kb.nextInt();
-				}
-				if (ft == 0) {
-					First = true;
-				} else if (ft == 1) {
-					First = false;
-				}
-				if (First == true) {
-					System.out.println("- Goal of the Game -");
-					System.out.println(
-							"The goal of the game is to be the first Player to have zero cards in their hand.");
+					while (!(ft == 0 || ft == 1)) {
+						System.out.println("Please select a vaild option");
+						System.out.println("Enter 0 for Yes\nEnter 1 for No");
+						ft = kb.nextInt();
+					}
+					if (ft == 0) {
+						First = true;
+					} else if (ft == 1) {
+						First = false;
+					}
+					if (First == true) {
+						System.out.println("- Goal of the Game -");
+						System.out.println(
+								"The goal of the game is to be the first Player to have zero cards in their hand.");
+						System.out.println("Enter anything to continue.");
+						con = kb.next();
+					}
+					// Tutorial: Card Edition
+					Deck td = new Deck();
+					td.clear();
+					td.testDeck();
+					Card CEX = td.cardDeal();
+					System.out.println("- Cards -");
+					System.out.println("This is a Card: " + CEX);
+					System.out.println("The First symbol represents the Card's Color.");
+					System.out.println("The Second symbol represents the Card's Rank.");
 					System.out.println("Enter anything to continue.");
 					con = kb.next();
-				}
-				// Tutorial: Card Edition
-				Deck td = new Deck();
-				td.clear();
-				td.testDeck();
-				Card CEX = td.cardDeal();
-				System.out.println("- Cards -");
-				System.out.println("This is a Card: " + CEX);
-				System.out.println("The First symbol represents the Card's Color.");
-				System.out.println("The Second symbol represents the Card's Rank.");
-				System.out.println("Enter anything to continue.");
-				con = kb.next();
-				if (First == true) {
-					System.out.println("There are 4 possible Colors: Red(R), Blue(B), Green(G), and Yellow(Y)");
-					System.out.println();
-					System.out.println("A Card's Rank can be split into 2 groups: Number Cards and Action Cards.");
-					System.out.println();
-					System.out
-							.println("Number Cards will have a number as their Rank: ranging from Zero(0) to Nine(9).");
-					System.out.println("Action Cards, when played, will have an additional effect:");
-					System.out.println();
-					System.out.println("A Skip Card(SK) will skip the next Player's turn.");
-					System.out.println("A Reverse Card(RV) will reverse the turn order.");
-					System.out.println("*In a 2-Player game, the Reverse Card acts like a Skip Card.");
-					System.out.println(
-							"A Draw 2 Card(2+) will force the next Player to draw 2 cards and lose their turn.");
-					System.out.println("A Wild Card(Wild) will let the Player choose the Color of the Card.");
-					System.out.println("A Wild Draw 4 Card(4+) will let the Player choose the Color of the Card\n"
-							+ "\tand will force the next Player to draw 4 cards and lose their turn.");
-					System.out.println();
-					System.out.println("Wild Cards can be played on top of any other card.");
+					if (First == true) {
+						System.out.println("There are 4 possible Colors: Red(R), Blue(B), Green(G), and Yellow(Y)");
+						System.out.println("Enter anything to continue.");
+						con = kb.next();
+						System.out.println("A Card's Rank can be split into 2 groups: Number Cards and Action Cards.");
+						System.out.println("Enter anything to continue.");
+						con = kb.next();
+						System.out.println(
+								"Number Cards will have a number as their Rank: ranging from Zero(0) to Nine(9).");
+						System.out.println("Action Cards, when played, will have an additional effect:");
+						System.out.println("Enter anything to continue.");
+						con = kb.next();
+						System.out.println("A Skip Card(SK) will skip the next Player's turn.");
+						System.out.println("A Reverse Card(RV) will reverse the turn order.");
+						System.out.println("*In a 2-Player game, the Reverse Card acts like a Skip Card.");
+						System.out.println(
+								"A Draw 2 Card(2+) will force the next Player to draw 2 cards and lose their turn.");
+						System.out.println("A Wild Card(Wild) will let the Player choose the Color of the Card.");
+						System.out.println("A Wild Draw 4 Card(4+) will let the Player choose the Color of the Card\n"
+								+ "\tand will force the next Player to draw 4 cards and lose their turn.");
+						System.out.println("Enter anything to continue.");
+						con = kb.next();
+						System.out.println("Wild Cards can be played on top of any other card.");
+						System.out.println("Enter anything to continue.");
+						con = kb.next();
+					}
+					// Tutorial: Hand Edition
+					PlayerHand tph = new PlayerHand();
+					for (int i = 0; i < 7; i++) {
+						tph.draw(td.cardDeal());
+					}
+					System.out.println("- Hand -");
+					System.out.println("Below is an example of a hand.");
+					System.out.println(name + "'s hand: " + tph);
 					System.out.println("Enter anything to continue.");
 					con = kb.next();
-				}
-				// Tutorial: Hand Edition
-				PlayerHand tph = new PlayerHand();
-				for (int i = 0; i < 7; i++) {
-					tph.draw(td.cardDeal());
-				}
-				System.out.println("- Hand -");
-				System.out.println("Below is an example of a hand.");
-				System.out.println(name + "'s hand: " + tph);
-				System.out.println("Enter anything to continue.");
-				con = kb.next();
-				// Tutorial: Playing Edition
-				System.out.println("- Playing Cards -");
-				System.out.println("During your turn, if capable, you will be prompted to play a card.");
-				System.out.println("EX. You can play a card. Choose a Card: |1 - 7|");
-				System.out.println();
-				System.out.println("The numbers represent the range of cards in your hand.");
-				System.out.println("You play a card by entering in the card's location in your hand.");
-				System.out.println(
-						"The first number being the leftmost card and\n\tthe second number being the rightmost card.");
+					// Tutorial: Playing Edition
+					System.out.println("- Playing Cards -");
+					System.out.println("During your turn, if capable, you will be prompted to play a card.");
+					System.out.println("EX. You can play a card. Choose a Card: |1 - 7|");
+					System.out.println();
+					System.out.println("The numbers represent the range of cards in your hand.");
+					System.out.println("You play a card by entering in the card's location in your hand.");
+					System.out.println(
+							"The first number being the leftmost card and\n\tthe second number being the rightmost card.");
 
-				if (First == true) {
-					System.out.println("*You can play a card if its Color or Rank matches, or if it is a Wild Card.");
-				}
-				System.out.println("Enter anything to continue.");
-				con = kb.next();
-			} // end of tutorial
-		}
+					if (First == true) {
+						System.out
+								.println("*You can play a card if its Color or Rank matches, or if it is a Wild Card.");
+					}
+					System.out.println("Enter anything to continue.");
+					con = kb.next();
+				} // end of tutorial
+			}
 
-		// Creating Deck, Discard, PlayerHands, and Turn Count
-		Deck k = new Deck();
-		Deck Discard = new Deck();
-		Discard.clear();
-		ArrayList<PlayerHand> Player = new ArrayList<PlayerHand>();
-		int Turns[] = new int[PN];
-		int TTC = 0;
-		for (int i = 0; i < PN; i++) {
-			PlayerHand p = new PlayerHand();
-			Player.add(p);
-			Turns[i] = 0;
-			k.shuffle();
-		}
+			// Creating Deck, Discard, PlayerHands, and Turn Count
+			Deck k = new Deck();
+			Deck Discard = new Deck();
+			Discard.clear();
+			ArrayList<PlayerHand> Player = new ArrayList<PlayerHand>();
+			int Turns[] = new int[PN];
+			int TTC = 0;
+			for (int i = 0; i < PN; i++) {
+				PlayerHand p = new PlayerHand();
+				Player.add(p);
+				Turns[i] = 0;
+				k.shuffle();
+			}
 
-		// - Choose to Stack "2+" Cards - |true or false|
-		boolean Stack = false;
-		int toStack;
-		if (PN > 2) {
-			System.out.println("- Stacking -");
-			System.out.println("Would you like to add an Extra Rule to stack Draw 2 Cards?");
-			System.out.println("Enter 0 for Yes\nEnter 1 for No\nEnter 2 for Explanation");
-			toStack = kb.nextInt();
-			while (!(toStack == 0 || toStack == 1 || toStack == 2)) {
-				System.out.println("Please select a vaild option");
+			// - Choose to Stack "2+" Cards - |true or false|
+			boolean Stack = false;
+			int toStack;
+			if (PN > 2) {
+				System.out.println("- Stacking -");
+				System.out.println("Would you like to add an Extra Rule to stack Draw 2 Cards?");
 				System.out.println("Enter 0 for Yes\nEnter 1 for No\nEnter 2 for Explanation");
 				toStack = kb.nextInt();
-			}
-			if (toStack == 2) {
-				System.out.println("How stacking works is whenever a Player plays a Draw 2 Card(2+),\n"
-						+ "\tthe next Player can also play a Draw 2 Card to avoid drawing any cards.");
-				System.out.println("If the next Player does not have a Draw 2 Card, they then must draw cards\n"
-						+ "\tbased on the number of Draw 2 Cards played.");
-				System.out.println("*Three Draw 2 Cards equal to Six(6) cards drawn.");
-				System.out.println("Enter anything to continue.");
-				con = kb.next();
-				System.out.println("Would you like to add an Extra Rule to stack Draw 2 Cards?");
-				System.out.println("Enter 0 for Yes\nEnter 1 for No");
-				toStack = kb.nextInt();
-				while (!(toStack == 0 || toStack == 1)) {
+				while (!(toStack == 0 || toStack == 1 || toStack == 2)) {
 					System.out.println("Please select a vaild option");
-					System.out.println("Enter 0 for Yes\nEnter 1 for No");
+					System.out.println("Enter 0 for Yes\nEnter 1 for No\nEnter 2 for Explanation");
 					toStack = kb.nextInt();
 				}
+				if (toStack == 2) {
+					System.out.println("How stacking works is whenever a Player plays a Draw 2 Card(2+),\n"
+							+ "\tthe next Player can also play a Draw 2 Card to avoid drawing any cards.");
+					System.out.println("If the next Player does not have a Draw 2 Card, they then must draw cards\n"
+							+ "\tbased on the number of Draw 2 Cards played.");
+					System.out.println("*Three Draw 2 Cards equal to Six(6) cards drawn.");
+					System.out.println("Enter anything to continue.");
+					con = kb.next();
+					System.out.println("Would you like to add an Extra Rule to stack Draw 2 Cards?");
+					System.out.println("Enter 0 for Yes\nEnter 1 for No");
+					toStack = kb.nextInt();
+					while (!(toStack == 0 || toStack == 1)) {
+						System.out.println("Please select a vaild option");
+						System.out.println("Enter 0 for Yes\nEnter 1 for No");
+						toStack = kb.nextInt();
+					}
+				}
+				if (toStack == 0) {
+					Stack = true;
+				} else if (toStack == 1) {
+					Stack = false;
+				}
 			}
-			if (toStack == 0) {
-				Stack = true;
-			} else if (toStack == 1) {
-				Stack = false;
-			}
-		}
 
-		// Dealing Beginning Hands
-		if (HP == true && CP == HN) {
-			System.out.println("You will deal.");
-		} else {
-			System.out.println("Player " + (CP + 1) + " deals.");
-		}
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < PN; j++) {
-				Player.get(j).draw(k.cardDeal());
+			// Dealing Beginning Hands
+			if (HP == true && CP == HN) {
+				System.out.println("You will deal.");
+			} else {
+				System.out.println("Player " + (CP + 1) + " deals.");
 			}
-		}
-		System.out.println();
-
-		// Displaying Hands
-		if (HP == true) {
-			System.out.println("This is your Starting Hand:");
-			System.out.println(name + "'s: " + Player.get(HN));
-			System.out.println("Enter anything to continue.");
-			con = kb.next();
-		} else {
-			System.out.println("These are the Starting Hands:");
-			for (int i = 0; i < PN; i++) {
-				System.out.println("P" + (i + 1) + ": " + Player.get(i));
+			for (int i = 0; i < 7; i++) {
+				for (int j = 0; j < PN; j++) {
+					Player.get(j).draw(k.cardDeal());
+				}
 			}
 			System.out.println();
-		}
 
-		// Calculating Starting Player
-		int sp = (CP + 1);
-		if (sp > (PN - 1)) {
-			sp = 0;
-		}
+			// Displaying Hands
+			if (HP == true) {
+				System.out.println("This is your Starting Hand:");
+				System.out.println(name + "'s: " + Player.get(HN));
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+			} else {
+				System.out.println("These are the Starting Hands:");
+				for (int i = 0; i < PN; i++) {
+					System.out.println("P" + (i + 1) + ": " + Player.get(i));
+				}
+				System.out.println();
+			}
 
-		// Dealing the Top Card
-		Card TopCard = k.cardDeal();
+			// Calculating Starting Player
+			int sp = (CP + 1);
+			if (sp > (PN - 1)) {
+				sp = 0;
+			}
 
-		// - Choose ONE Top Card Option - |0 or 1|
-		int TCO;
-		System.out.println("- Top Card Selection -");
-		System.out.println("Select how to draw the first Top Card");
-		System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
-		System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
-		System.out.println("Enter 2 for Explanation");
-		TCO = kb.nextInt();
-		if (TCO == 2) {
-			System.out.println("Here you will be deciding how the first Top Card is drawn.");
-			System.out.println("The Home-Rule Option(0) draws until the first Top Card is a number card.");
-			System.out.println(
-					"The Base-Rule Option(1) draws the first Top Card\n" + "\tand applies any effects if necessary.");
-			System.out.println("Enter anything to continue.");
-			con = kb.next();
+			// Dealing the Top Card
+			Card TopCard = k.cardDeal();
+
+			// - Choose ONE Top Card Option - |0 or 1|
+			int TCO;
+			System.out.println("- Top Card Selection -");
 			System.out.println("Select how to draw the first Top Card");
 			System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
 			System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
+			System.out.println("Enter 2 for Explanation");
 			TCO = kb.nextInt();
-			while (!(TCO == 0 || TCO == 1)) {
-				System.out.println("Please select a vaild option");
+			if (TCO == 2) {
+				System.out.println("Here you will be deciding how the first Top Card is drawn.");
+				System.out.println("The Home-Rule Option(0) draws until the first Top Card is a number card.");
+				System.out.println("The Base-Rule Option(1) draws the first Top Card\n"
+						+ "\tand applies any effects if necessary.");
+				System.out.println("Enter anything to continue.");
+				con = kb.next();
+				System.out.println("Select how to draw the first Top Card");
 				System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
 				System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
 				TCO = kb.nextInt();
-			}
-		}
-		if (TCO == 0) {
-			// Top Card Option (0): Home-Rule - No Action Cards
-			while ((TopCard.getRank().equals("SK") || TopCard.getRank().equals("RV") || TopCard.getRank().equals("2+")
-					|| TopCard.getRank().equals("Wild") || TopCard.getRank().equals("4+"))) {
-				Discard.addDeck(TopCard);
-				TopCard = k.cardDeal();
-			}
-			System.out.println("The Top Card is " + TopCard);
-			if (HP == true && sp == HN) {
-				System.out.println(name + " starts.");
-			} else {
-				System.out.println("Player " + (sp + 1) + " starts.");
-			}
-		} else if (TCO == 1) {
-			// Top Card Option (1): Base-Rule - Anything Goes
-			while (TopCard.getRank().equals("4+")) {
-				k.addDeck(TopCard);
-				k.shuffle();
-				TopCard = k.cardDeal();
-			}
-			System.out.println("The Top Card is " + TopCard);
-			// - Card Effects -
-			// Skip Card
-			if (TopCard.getRank().equals("SK")) {
-				if (HP == true && sp == HN) {
-					System.out.println(name + "'s Turn is Skipped.");
-				} else {
-					System.out.println("Player " + (sp + 1) + "'s Turn is Skipped.");
+				while (!(TCO == 0 || TCO == 1)) {
+					System.out.println("Please select a vaild option");
+					System.out.println("Enter 0 for Top Card Option: Home-Rule - No Action Cards");
+					System.out.println("Enter 1 for Top Card Option: Base-Rule - Anything Goes");
+					TCO = kb.nextInt();
 				}
-				// Rotation of Player's Turns
-				sp++;
-				// Looping Players
-				if (sp > (PN - 1)) {
-					sp = 0;
+			}
+			if (TCO == 0) {
+				// Top Card Option (0): Home-Rule - No Action Cards
+				while ((TopCard.getRank().equals("SK") || TopCard.getRank().equals("RV")
+						|| TopCard.getRank().equals("2+") || TopCard.getRank().equals("Wild")
+						|| TopCard.getRank().equals("4+"))) {
+					Discard.addDeck(TopCard);
+					TopCard = k.cardDeal();
 				}
-				CP++;
-				// Looping Players
-				if (CP > (PN - 1)) {
-					CP = 0;
-				}
+				System.out.println("The Top Card is " + TopCard);
 				if (HP == true && sp == HN) {
 					System.out.println(name + " starts.");
 				} else {
 					System.out.println("Player " + (sp + 1) + " starts.");
 				}
-			}
-			// Reverse Card
-			else if (TopCard.getRank().equals("RV")) {
-				if (PN == 2) {
+			} else if (TCO == 1) {
+				// Top Card Option (1): Base-Rule - Anything Goes
+				while (TopCard.getRank().equals("4+")) {
+					k.addDeck(TopCard);
+					k.shuffle();
+					TopCard = k.cardDeal();
+				}
+				System.out.println("The Top Card is " + TopCard);
+				// - Card Effects -
+				// Skip Card
+				if (TopCard.getRank().equals("SK")) {
 					if (HP == true && sp == HN) {
 						System.out.println(name + "'s Turn is Skipped.");
 					} else {
@@ -359,13 +344,74 @@ public class Driver_04 {
 					} else {
 						System.out.println("Player " + (sp + 1) + " starts.");
 					}
-				} else {
-					TurnRotation++;
-					System.out.println("Turn Order has been Reversed.");
-					sp = (CP - 1);
+				}
+				// Reverse Card
+				else if (TopCard.getRank().equals("RV")) {
+					if (PN == 2) {
+						if (HP == true && sp == HN) {
+							System.out.println(name + "'s Turn is Skipped.");
+						} else {
+							System.out.println("Player " + (sp + 1) + "'s Turn is Skipped.");
+						}
+						// Rotation of Player's Turns
+						sp++;
+						// Looping Players
+						if (sp > (PN - 1)) {
+							sp = 0;
+						}
+						CP++;
+						// Looping Players
+						if (CP > (PN - 1)) {
+							CP = 0;
+						}
+						if (HP == true && sp == HN) {
+							System.out.println(name + " starts.");
+						} else {
+							System.out.println("Player " + (sp + 1) + " starts.");
+						}
+					} else {
+						TurnRotation++;
+						System.out.println("Turn Order has been Reversed.");
+						sp = (CP - 1);
+						// Looping Players
+						if (sp < 0) {
+							sp = (PN - 1);
+						}
+						if (HP == true && sp == HN) {
+							System.out.println(name + " starts.");
+						} else {
+							System.out.println("Player " + (sp + 1) + " starts.");
+						}
+					}
+				}
+				// Draw 2+ Card
+				else if (TopCard.getRank().equals("2+")) {
+					// Drawing Cards
+					if (HP == true && sp == HN) {
+						System.out.println("You have to draw 2 Cards.");
+					} else {
+						System.out.println("Player " + (sp + 1) + " has to draws 2 Cards.");
+					}
+					for (int i = 0; i < 2; i++) {
+						if (HP == true && sp == HN) {
+							System.out.println(name + " drew " + Player.get(sp).draw(k.cardDeal()));
+						} else if (HP == true) {
+							System.out.println("Player " + (sp + 1) + " drew a Card.");
+							Player.get(sp).draw(k.cardDeal());
+						} else {
+							System.out.println("Player " + (sp + 1) + " drew " + Player.get(sp).draw(k.cardDeal()));
+						}
+					}
+					// Rotation of Player's Turns
+					sp++;
 					// Looping Players
-					if (sp < 0) {
-						sp = (PN - 1);
+					if (sp > (PN - 1)) {
+						sp = 0;
+					}
+					CP++;
+					// Looping Players
+					if (CP > (PN - 1)) {
+						CP = 0;
 					}
 					if (HP == true && sp == HN) {
 						System.out.println(name + " starts.");
@@ -373,267 +419,212 @@ public class Driver_04 {
 						System.out.println("Player " + (sp + 1) + " starts.");
 					}
 				}
-			}
-			// Draw 2+ Card
-			else if (TopCard.getRank().equals("2+")) {
-				// Drawing Cards
-				if (HP == true && sp == HN) {
-					System.out.println("You have to draw 2 Cards.");
-				} else {
-					System.out.println("Player " + (sp + 1) + " has to draws 2 Cards.");
-				}
-				for (int i = 0; i < 2; i++) {
+				// Wild Card
+				else if (TopCard.getRank().equals("Wild")) {
 					if (HP == true && sp == HN) {
-						System.out.println(name + " drew " + Player.get(sp).draw(k.cardDeal()));
-					} else if (HP == true) {
-						System.out.println("Player " + (sp + 1) + " drew a Card.");
-						Player.get(sp).draw(k.cardDeal());
+						// Selecting New Color
+						int nc;
+						System.out.println("Select a Color");
+						System.out.println("Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
+						nc = kb.nextInt();
+						while (!(nc == 0 || nc == 1 || nc == 2 || nc == 3)) {
+							System.out.println("Please select a vaild option");
+							System.out.println(
+									"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
+							nc = kb.nextInt();
+						}
+						TopCard.setColor(TopCard.getColor(), nc);
+						// Displaying New Color
+						if (TopCard.getColor().equals("R")) {
+							System.out.println(name + " chooses Red.");
+						} else if (TopCard.getColor().equals("B")) {
+							System.out.println(name + " chooses Blue.");
+						} else if (TopCard.getColor().equals("G")) {
+							System.out.println(name + " chooses Green.");
+						} else if (TopCard.getColor().equals("Y")) {
+							System.out.println(name + " chooses Yellow.");
+						}
+						System.out.println(name + " starts.");
 					} else {
-						System.out.println("Player " + (sp + 1) + " drew " + Player.get(sp).draw(k.cardDeal()));
+						// Selecting New Color
+						TopCard.setColorWild(TopCard.getColor());
+						if (Player.get(sp).hasColor()) {
+							while (!(Player.get(sp).colorMatch(TopCard))) {
+								TopCard.setColorWild(TopCard.getColor());
+							}
+						}
+						// Displaying New Color
+						if (TopCard.getColor().equals("R")) {
+							System.out.println("Player " + (sp + 1) + " chooses Red.");
+						} else if (TopCard.getColor().equals("B")) {
+							System.out.println("Player " + (sp + 1) + " chooses Blue.");
+						} else if (TopCard.getColor().equals("G")) {
+							System.out.println("Player " + (sp + 1) + " chooses Green.");
+						} else if (TopCard.getColor().equals("Y")) {
+							System.out.println("Player " + (sp + 1) + " chooses Yellow.");
+						}
+						System.out.println("Player " + (sp + 1) + " starts.");
+					}
+				} else {
+					if (HP == true && sp == HN) {
+						System.out.println(name + " starts.");
+					} else {
+						System.out.println("Player " + (sp + 1) + " starts.");
 					}
 				}
+				// end of Top Card Option: Base-Rule - Anything Goes
+			} // end of TCOs
+
+			System.out.println("Enter anything to start game.");
+			con = kb.next();
+			System.out.println();
+
+			// - Main Gameplay Loop -
+			while (winner == false) {
 				// Rotation of Player's Turns
-				sp++;
-				// Looping Players
-				if (sp > (PN - 1)) {
-					sp = 0;
+				if (TurnRotation % 2 == 0) {
+					CP--;
+				} else {
+					CP++;
 				}
-				CP++;
+				// Bounding Rotation
+				if (TurnRotation > 2) {
+					TurnRotation = 1;
+				}
 				// Looping Players
 				if (CP > (PN - 1)) {
 					CP = 0;
+				} else if (CP < 0) {
+					CP = (PN - 1);
 				}
-				if (HP == true && sp == HN) {
-					System.out.println(name + " starts.");
-				} else {
-					System.out.println("Player " + (sp + 1) + " starts.");
-				}
-			}
-			// Wild Card
-			else if (TopCard.getRank().equals("Wild")) {
-				if (HP == true && sp == HN) {
-					// Selecting New Color
-					int nc;
-					System.out.println("Select a Color");
-					System.out.println("Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
-					nc = kb.nextInt();
-					while (!(nc == 0 || nc == 1 || nc == 2 || nc == 3)) {
-						System.out.println("Please select a vaild option");
-						System.out.println("Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
-						nc = kb.nextInt();
-					}
-					TopCard.setColor(TopCard.getColor(), nc);
-					// Displaying New Color
-					if (TopCard.getColor().equals("R")) {
-						System.out.println(name + " chooses Red.");
-					} else if (TopCard.getColor().equals("B")) {
-						System.out.println(name + " chooses Blue.");
-					} else if (TopCard.getColor().equals("G")) {
-						System.out.println(name + " chooses Green.");
-					} else if (TopCard.getColor().equals("Y")) {
-						System.out.println(name + " chooses Yellow.");
-					}
-					System.out.println(name + " starts.");
-				} else {
-					// Selecting New Color
-					TopCard.setColorWild(TopCard.getColor());
-					if (Player.get(sp).hasColor()) {
-						while (!(Player.get(sp).colorMatch(TopCard))) {
-							TopCard.setColorWild(TopCard.getColor());
-						}
-					}
-					// Displaying New Color
-					if (TopCard.getColor().equals("R")) {
-						System.out.println("Player " + (sp + 1) + " chooses Red.");
-					} else if (TopCard.getColor().equals("B")) {
-						System.out.println("Player " + (sp + 1) + " chooses Blue.");
-					} else if (TopCard.getColor().equals("G")) {
-						System.out.println("Player " + (sp + 1) + " chooses Green.");
-					} else if (TopCard.getColor().equals("Y")) {
-						System.out.println("Player " + (sp + 1) + " chooses Yellow.");
-					}
-					System.out.println("Player " + (sp + 1) + " starts.");
-				}
-			} else {
-				if (HP == true && sp == HN) {
-					System.out.println(name + " starts.");
-				} else {
-					System.out.println("Player " + (sp + 1) + " starts.");
-				}
-			}
-			// end of Top Card Option: Base-Rule - Anything Goes
-		} // end of TCOs
 
-		System.out.println("Enter anything to start game.");
-		con = kb.next();
-		System.out.println();
-
-		// - Main Gameplay Loop -
-		while (winner == false) {
-			// Rotation of Player's Turns
-			if (TurnRotation % 2 == 0) {
-				CP--;
-			} else {
-				CP++;
-			}
-			// Bounding Rotation
-			if (TurnRotation > 2) {
-				TurnRotation = 1;
-			}
-			// Looping Players
-			if (CP > (PN - 1)) {
-				CP = 0;
-			} else if (CP < 0) {
-				CP = (PN - 1);
-			}
-
-			// Displaying Player's Turn and Hand, and the Top Card
-			if (HP == true && CP == HN) {
-				System.out.println("- " + name + "'s Turn -");
-				System.out.println("The Top Card is " + TopCard);
-				System.out.println(name + "'s hand: " + Player.get(CP));
-			} else if (HP == true) {
-				System.out.println("- Player " + (CP + 1) + "'s Turn -");
-				System.out.println("The Top Card is " + TopCard);
-			} else {
-				System.out.println("- Player " + (CP + 1) + "'s Turn -");
-				System.out.println("The Top Card is " + TopCard);
-				System.out.println("P" + (CP + 1) + "'s hand: " + Player.get(CP));
-			}
-
-			// Increasing Turn Count
-			TTC++;
-
-			// - Player's Turn -
-			// Player draws Card if needed
-			int dr = 0;
-			if (!(Player.get(CP).cardMatch(TopCard))) {
+				// Displaying Player's Turn and Hand, and the Top Card
 				if (HP == true && CP == HN) {
-					System.out.println("You don't have any playable cards.");
-					System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
+					System.out.println("- " + name + "'s Turn -");
+					System.out.println("The Top Card is " + TopCard);
+					System.out.println(name + "'s hand: " + Player.get(CP));
 				} else if (HP == true) {
-					System.out.println("Player " + (CP + 1) + " drew a Card.");
-					Player.get(CP).draw(k.cardDeal());
+					System.out.println("- Player " + (CP + 1) + "'s Turn -");
+					System.out.println("The Top Card is " + TopCard);
 				} else {
-					System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
-				}
-				dr = 1;
-			}
-			// Player has a match
-			if (Player.get(CP).cardMatch(TopCard)) {
-				int p;
-				if (HP == true && CP == HN) {
-					System.out.println("You can play a card. Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
-					if (dr == 1) {
-						System.out.println(name + "'s hand: " + Player.get(CP));
-					}
-					int hcp = kb.nextInt();
-					boolean playable = false;
-					while (playable == false) {
-						p = (hcp - 1);
-						if (hcp < 1 || hcp > Player.get(CP).getSize()) {
-							System.out.println("That is not a Card. - Try Again");
-							System.out.println("The Top Card is " + TopCard);
-							System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
-							System.out.println(Player.get(CP));
-							hcp = kb.nextInt();
-						} else if (!(Player.get(CP).isMatch(TopCard, p))) {
-							System.out.println("You can't play that! - Try Again");
-							System.out.println("The Top Card is " + TopCard);
-							System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
-							System.out.println(Player.get(CP));
-							hcp = kb.nextInt();
-						} else if (Player.get(CP).isMatch(TopCard, p)) {
-							Discard.addDeck(TopCard);
-							TopCard = Player.get(CP).play(p);
-							System.out.println("You played " + TopCard);
-							playable = true;
-							Turns[CP] += 1;
-						}
-					}
-				} else {
-					p = Player.get(CP).findMatch(TopCard);
-					Discard.addDeck(TopCard);
-					TopCard = Player.get(CP).play(p);
-					System.out.println("Player " + (CP + 1) + " played " + TopCard);
-					Turns[CP] += 1;
+					System.out.println("- Player " + (CP + 1) + "'s Turn -");
+					System.out.println("The Top Card is " + TopCard);
+					System.out.println("P" + (CP + 1) + "'s hand: " + Player.get(CP));
 				}
 
-				// If Player Has UNO
-				if (Player.get(CP).uno() == true) {
-					int roll = rnd.nextInt(6);
-					// Player failed to say UNO!
-					if (roll == 0) {
-						int b = rnd.nextInt((PN - 1)) + 1;
-						int cn;
-						// Selecting Player
-						if (TurnRotation % 2 == 0) {
-							cn = CP + b;
-						} else {
-							cn = CP - b;
+				// Increasing Turn Count
+				TTC++;
+
+				// - Player's Turn -
+				// Player draws Card if needed
+				int dr = 0;
+				if (!(Player.get(CP).cardMatch(TopCard))) {
+					if (HP == true && CP == HN) {
+						System.out.println("You don't have any playable cards.");
+						System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
+					} else if (HP == true) {
+						System.out.println("Player " + (CP + 1) + " drew a Card.");
+						Player.get(CP).draw(k.cardDeal());
+					} else {
+						System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
+					}
+					dr = 1;
+				}
+				// Player has a match
+				if (Player.get(CP).cardMatch(TopCard)) {
+					int p;
+					if (HP == true && CP == HN) {
+						System.out
+								.println("You can play a card. Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
+						if (dr == 1) {
+							System.out.println(name + "'s hand: " + Player.get(CP));
 						}
-						// Looping Selection
-						if (cn > (PN - 1)) {
-							cn = 0;
-						} else if (cn < 0) {
-							cn = (PN - 1);
-						}
-						if (HP == true && cn == HN) {
-							System.out.println("You said UNO first!");
-						} else {
-							System.out.println("Player " + (cn + 1) + " said UNO first!");
-						}
-						// Drawing Cards
-						if (HP == true && CP == HN) {
-							System.out.println("You now have to draw 2 Cards.");
-						} else {
-							System.out.println("Player " + (CP + 1) + " now has to draw 2 Cards.");
-						}
-						for (int i = 0; i < 2; i++) {
-							if (HP == true && CP == HN) {
-								System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
-							} else if (HP == true) {
-								System.out.println("Player " + (CP + 1) + " drew a Card.");
-								Player.get(CP).draw(k.cardDeal());
-							} else {
-								System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
+						int hcp = kb.nextInt();
+						boolean playable = false;
+						while (playable == false) {
+							p = (hcp - 1);
+							if (hcp < 1 || hcp > Player.get(CP).getSize()) {
+								System.out.println("That is not a Card. - Try Again");
+								System.out.println("The Top Card is " + TopCard);
+								System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
+								System.out.println(Player.get(CP));
+								hcp = kb.nextInt();
+							} else if (!(Player.get(CP).isMatch(TopCard, p))) {
+								System.out.println("You can't play that! - Try Again");
+								System.out.println("The Top Card is " + TopCard);
+								System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
+								System.out.println(Player.get(CP));
+								hcp = kb.nextInt();
+							} else if (Player.get(CP).isMatch(TopCard, p)) {
+								Discard.addDeck(TopCard);
+								TopCard = Player.get(CP).play(p);
+								System.out.println("You played " + TopCard);
+								playable = true;
+								Turns[CP] += 1;
 							}
 						}
-					} // end of failed UNO
-					else {
-						if (HP == true && CP == HN) {
-							System.out.println("You said UNO!");
-						} else {
-							System.out.println("Player " + (CP + 1) + " said UNO!");
-						}
+					} else {
+						p = Player.get(CP).findMatch(TopCard);
+						Discard.addDeck(TopCard);
+						TopCard = Player.get(CP).play(p);
+						System.out.println("Player " + (CP + 1) + " played " + TopCard);
+						Turns[CP] += 1;
 					}
-				} // end of if UNO!
 
-				// - Card Effects -
-				// Skip Card
-				if (TopCard.getRank().equals("SK")) {
-					// Rotation of Player's Turns
-					if (TurnRotation % 2 == 0) {
-						CP--;
-					} else {
-						CP++;
-					}
-					// Looping Players
-					if (CP > (PN - 1)) {
-						CP = 0;
-					} else if (CP < 0) {
-						CP = (PN - 1);
-					}
-					if (HP == true && CP == HN) {
-						System.out.println(name + "'s Turn is Skipped.");
-					} else {
-						System.out.println("Player " + (CP + 1) + "'s Turn is Skipped.");
-					}
-					SKp++;
-				}
-				// Reverse Card
-				else if (TopCard.getRank().equals("RV")) {
-					if (PN == 2) {
+					// If Player Has UNO
+					if (Player.get(CP).uno() == true) {
+						int roll = rnd.nextInt(6);
+						// Player failed to say UNO!
+						if (roll == 0) {
+							int b = rnd.nextInt((PN - 1)) + 1;
+							int cn;
+							// Selecting Player
+							if (TurnRotation % 2 == 0) {
+								cn = CP + b;
+							} else {
+								cn = CP - b;
+							}
+							// Looping Selection
+							if (cn > (PN - 1)) {
+								cn = 0;
+							} else if (cn < 0) {
+								cn = (PN - 1);
+							}
+							if (HP == true && cn == HN) {
+								System.out.println("You said UNO first!");
+							} else {
+								System.out.println("Player " + (cn + 1) + " said UNO first!");
+							}
+							// Drawing Cards
+							if (HP == true && CP == HN) {
+								System.out.println("You now have to draw 2 Cards.");
+							} else {
+								System.out.println("Player " + (CP + 1) + " now has to draw 2 Cards.");
+							}
+							for (int i = 0; i < 2; i++) {
+								if (HP == true && CP == HN) {
+									System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
+								} else if (HP == true) {
+									System.out.println("Player " + (CP + 1) + " drew a Card.");
+									Player.get(CP).draw(k.cardDeal());
+								} else {
+									System.out.println(
+											"Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
+								}
+							}
+						} // end of failed UNO
+						else {
+							if (HP == true && CP == HN) {
+								System.out.println("You said UNO!");
+							} else {
+								System.out.println("Player " + (CP + 1) + " said UNO!");
+							}
+						}
+					} // end of if UNO!
+
+					// - Card Effects -
+					// Skip Card
+					if (TopCard.getRank().equals("SK")) {
 						// Rotation of Player's Turns
 						if (TurnRotation % 2 == 0) {
 							CP--;
@@ -651,359 +642,406 @@ public class Driver_04 {
 						} else {
 							System.out.println("Player " + (CP + 1) + "'s Turn is Skipped.");
 						}
-						RVp++;
-					} else {
-						TurnRotation++;
-						System.out.println("Turn Order has been Reversed.");
-						RVp++;
+						SKp++;
 					}
-				}
-				// Draw 2+ Card
-				else if (TopCard.getRank().equals("2+")) {
-					// Rotation of Player's Turns
-					if (TurnRotation % 2 == 0) {
-						CP--;
-					} else {
-						CP++;
-					}
-					// Looping Players
-					if (CP > (PN - 1)) {
-						CP = 0;
-					} else if (CP < 0) {
-						CP = (PN - 1);
-					}
-					int dn = 2;
-					// Optional: Home-Rule - Stacking "2+" Cards
-					if (Stack == true) {
-						int sb = (CP - 1);
-						if (sb < 0) {
-							sb = (PN - 1);
+					// Reverse Card
+					else if (TopCard.getRank().equals("RV")) {
+						if (PN == 2) {
+							// Rotation of Player's Turns
+							if (TurnRotation % 2 == 0) {
+								CP--;
+							} else {
+								CP++;
+							}
+							// Looping Players
+							if (CP > (PN - 1)) {
+								CP = 0;
+							} else if (CP < 0) {
+								CP = (PN - 1);
+							}
+							if (HP == true && CP == HN) {
+								System.out.println(name + "'s Turn is Skipped.");
+							} else {
+								System.out.println("Player " + (CP + 1) + "'s Turn is Skipped.");
+							}
+							RVp++;
+						} else {
+							TurnRotation++;
+							System.out.println("Turn Order has been Reversed.");
+							RVp++;
 						}
-						if (!(Player.get(sb).isEmpty())) {
-							while (Player.get(CP).canStack()) {
-								int s;
-								if (HP == true && CP == HN) {
-									System.out.println("You can stack with a (2+). Choose a Card:");
-									System.out.println(Player.get(CP));
-									int hcp = kb.nextInt();
-									boolean playable = false;
-									while (playable == false) {
-										s = (hcp - 1);
-										if (hcp < 1 || hcp > Player.get(CP).getSize()) {
-											System.out.println("That is not a Card. - Try Again");
-											System.out.println("You need to play a (2+) Card.");
-											System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
-											System.out.println(Player.get(CP));
-											hcp = kb.nextInt();
-										} else if (!(Player.get(CP).isStackable(TopCard, s))) {
-											System.out.println("You can't stack with that! - Try Again");
-											System.out.println("You need to play a (2+) Card.");
-											System.out.println("Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
-											System.out.println(Player.get(CP));
-											hcp = kb.nextInt();
-										} else if (Player.get(CP).isStackable(TopCard, s)) {
-											Discard.addDeck(TopCard);
-											TopCard = Player.get(CP).play(s);
-											System.out.println("You stacked with " + TopCard);
-											playable = true;
-											Turns[CP] += 1;
-										}
-									}
-								} else {
-									s = Player.get(CP).findStack();
-									Discard.addDeck(TopCard);
-									TopCard = Player.get(CP).play(s);
-									System.out.println("Player " + (CP + 1) + " stacks with " + TopCard);
-									Turns[CP] += 1;
-								}
-								// If Player Has UNO
-								if (Player.get(CP).uno() == true) {
-									int roll = rnd.nextInt(6);
-									// Player failed to say UNO!
-									if (roll == 0) {
-										int b = rnd.nextInt((PN - 1)) + 1;
-										int cn;
-										// Selecting Player
-										if (TurnRotation % 2 == 0) {
-											cn = CP + b;
-										} else {
-											cn = CP - b;
-										}
-										// Looping Selection
-										if (cn > (PN - 1)) {
-											cn = 0;
-										} else if (cn < 0) {
-											cn = (PN - 1);
-										}
-										if (HP == true && cn == HN) {
-											System.out.println("You said UNO first!");
-										} else {
-											System.out.println("Player " + (cn + 1) + " said UNO first!");
-										}
-										// Drawing Cards
-										if (HP == true && CP == HN) {
-											System.out.println("You now have to draw 2 Cards.");
-										} else {
-											System.out.println("Player " + (CP + 1) + " now has to draw 2 Cards.");
-										}
-										for (int i = 0; i < 2; i++) {
-											if (HP == true && CP == HN) {
-												System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
-											} else if (HP == true) {
-												System.out.println("Player " + (CP + 1) + " drew a Card.");
-												Player.get(CP).draw(k.cardDeal());
-											} else {
-												System.out.println("Player " + (CP + 1) + " drew "
-														+ Player.get(CP).draw(k.cardDeal()));
+					}
+					// Draw 2+ Card
+					else if (TopCard.getRank().equals("2+")) {
+						// Rotation of Player's Turns
+						if (TurnRotation % 2 == 0) {
+							CP--;
+						} else {
+							CP++;
+						}
+						// Looping Players
+						if (CP > (PN - 1)) {
+							CP = 0;
+						} else if (CP < 0) {
+							CP = (PN - 1);
+						}
+						int dn = 2;
+						// Optional: Home-Rule - Stacking "2+" Cards
+						if (Stack == true) {
+							int sb = (CP - 1);
+							if (sb < 0) {
+								sb = (PN - 1);
+							}
+							if (!(Player.get(sb).isEmpty())) {
+								while (Player.get(CP).canStack()) {
+									int s;
+									if (HP == true && CP == HN) {
+										System.out.println("You can stack with a (2+). Choose a Card: |1 - "
+												+ Player.get(CP).getSize() + "|");
+										System.out.println(Player.get(CP));
+										int hcp = kb.nextInt();
+										boolean playable = false;
+										while (playable == false) {
+											s = (hcp - 1);
+											if (hcp < 1 || hcp > Player.get(CP).getSize()) {
+												System.out.println("That is not a Card. - Try Again");
+												System.out.println("You need to play a (2+) Card.");
+												System.out.println(
+														"Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
+												System.out.println(Player.get(CP));
+												hcp = kb.nextInt();
+											} else if (!(Player.get(CP).isStackable(TopCard, s))) {
+												System.out.println("You can't stack with that! - Try Again");
+												System.out.println("You need to play a (2+) Card.");
+												System.out.println(
+														"Choose a Card: |1 - " + Player.get(CP).getSize() + "|");
+												System.out.println(Player.get(CP));
+												hcp = kb.nextInt();
+											} else if (Player.get(CP).isStackable(TopCard, s)) {
+												Discard.addDeck(TopCard);
+												TopCard = Player.get(CP).play(s);
+												System.out.println("You stacked with " + TopCard);
+												playable = true;
+												Turns[CP] += 1;
 											}
 										}
-									} // end of failed UNO
-									else {
-										if (HP == true && CP == HN) {
-											System.out.println("You said UNO!");
-										} else {
-											System.out.println("Player " + (CP + 1) + " said UNO!");
-										}
+									} else {
+										s = Player.get(CP).findStack();
+										Discard.addDeck(TopCard);
+										TopCard = Player.get(CP).play(s);
+										System.out.println("Player " + (CP + 1) + " stacks with " + TopCard);
+										Turns[CP] += 1;
 									}
-								} // end of if UNO!
-								dn += 2;
-								// Rotation of Player's Turns
-								if (TurnRotation % 2 == 0) {
-									CP--;
-								} else {
-									CP++;
+									// If Player Has UNO
+									if (Player.get(CP).uno() == true) {
+										int roll = rnd.nextInt(6);
+										// Player failed to say UNO!
+										if (roll == 0) {
+											int b = rnd.nextInt((PN - 1)) + 1;
+											int cn;
+											// Selecting Player
+											if (TurnRotation % 2 == 0) {
+												cn = CP + b;
+											} else {
+												cn = CP - b;
+											}
+											// Looping Selection
+											if (cn > (PN - 1)) {
+												cn = 0;
+											} else if (cn < 0) {
+												cn = (PN - 1);
+											}
+											if (HP == true && cn == HN) {
+												System.out.println("You said UNO first!");
+											} else {
+												System.out.println("Player " + (cn + 1) + " said UNO first!");
+											}
+											// Drawing Cards
+											if (HP == true && CP == HN) {
+												System.out.println("You now have to draw 2 Cards.");
+											} else {
+												System.out.println("Player " + (CP + 1) + " now has to draw 2 Cards.");
+											}
+											for (int i = 0; i < 2; i++) {
+												if (HP == true && CP == HN) {
+													System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
+												} else if (HP == true) {
+													System.out.println("Player " + (CP + 1) + " drew a Card.");
+													Player.get(CP).draw(k.cardDeal());
+												} else {
+													System.out.println("Player " + (CP + 1) + " drew "
+															+ Player.get(CP).draw(k.cardDeal()));
+												}
+											}
+										} // end of failed UNO
+										else {
+											if (HP == true && CP == HN) {
+												System.out.println("You said UNO!");
+											} else {
+												System.out.println("Player " + (CP + 1) + " said UNO!");
+											}
+										}
+									} // end of if UNO!
+									dn += 2;
+									// Rotation of Player's Turns
+									if (TurnRotation % 2 == 0) {
+										CP--;
+									} else {
+										CP++;
+									}
+									// Looping Players
+									if (CP > (PN - 1)) {
+										CP = 0;
+									} else if (CP < 0) {
+										CP = (PN - 1);
+									}
 								}
-								// Looping Players
-								if (CP > (PN - 1)) {
-									CP = 0;
-								} else if (CP < 0) {
-									CP = (PN - 1);
+							}
+						} // end of Optional: Home-Rule - Stacking "2+" Cards
+							// Drawing Cards
+						if (HP == true && CP == HN) {
+							System.out.println(name + " has to draws " + dn + " Cards.");
+						} else {
+							System.out.println("Player " + (CP + 1) + " has to draws " + dn + " Cards.");
+						}
+						for (int i = 0; i < dn; i++) {
+							if (HP == true && CP == HN) {
+								System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
+							} else if (HP == true) {
+								System.out.println("Player " + (CP + 1) + " drew a Card.");
+								Player.get(CP).draw(k.cardDeal());
+							} else {
+								System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
+							}
+							// Reset Draw Pile
+							if (k.isEmpty() == true) {
+								System.out.println("*Resetting Draw Pile*");
+								while (!(Discard.isEmpty())) {
+									Card q = Discard.cardDeal();
+									if (q.getRank().equals("Wild") || q.getRank().equals("4+")) {
+										q.resetWild(q.getColor());
+									}
+									k.addDeck(q);
+								}
+								k.shuffle();
+							}
+						}
+						D2p++;
+					}
+					// Wild Card
+					else if (TopCard.getRank().equals("Wild")) {
+						if (HP == true && CP == HN) {
+							// Selecting New Color
+							int nc;
+							System.out.println("Select a Color");
+							System.out.println(
+									"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
+							nc = kb.nextInt();
+							while (!(nc == 0 || nc == 1 || nc == 2 || nc == 3)) {
+								System.out.println("Please select a vaild option");
+								System.out.println(
+										"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
+								nc = kb.nextInt();
+							}
+							TopCard.setColor(TopCard.getColor(), nc);
+							// Displaying New Color
+							if (TopCard.getColor().equals("R")) {
+								System.out.println(name + " chooses Red.");
+							} else if (TopCard.getColor().equals("B")) {
+								System.out.println(name + " chooses Blue.");
+							} else if (TopCard.getColor().equals("G")) {
+								System.out.println(name + " chooses Green.");
+							} else if (TopCard.getColor().equals("Y")) {
+								System.out.println(name + " chooses Yellow.");
+							}
+						} else {
+							// Selecting New Color
+							TopCard.setColorWild(TopCard.getColor());
+							if (Player.get(CP).hasColor()) {
+								while (!(Player.get(CP).colorMatch(TopCard))) {
+									TopCard.setColorWild(TopCard.getColor());
+								}
+							}
+							// Displaying New Color
+							if (TopCard.getColor().equals("R")) {
+								System.out.println("Player " + (CP + 1) + " chooses Red.");
+							} else if (TopCard.getColor().equals("B")) {
+								System.out.println("Player " + (CP + 1) + " chooses Blue.");
+							} else if (TopCard.getColor().equals("G")) {
+								System.out.println("Player " + (CP + 1) + " chooses Green.");
+							} else if (TopCard.getColor().equals("Y")) {
+								System.out.println("Player " + (CP + 1) + " chooses Yellow.");
+							}
+						}
+						Wp++;
+					}
+					// Draw 4+ Wild Card
+					else if (TopCard.getRank().equals("4+")) {
+						if (HP == true && CP == HN) {
+							// Selecting New Color
+							int nc;
+							System.out.println("Select a Color");
+							System.out.println(
+									"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
+							nc = kb.nextInt();
+							while (!(nc == 0 || nc == 1 || nc == 2 || nc == 3)) {
+								System.out.println("Please select a vaild option");
+								System.out.println(
+										"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
+								nc = kb.nextInt();
+							}
+							TopCard.setColor(TopCard.getColor(), nc);
+						} else {
+							// Selecting New Color
+							TopCard.setColorWild(TopCard.getColor());
+							if (Player.get(CP).hasColor()) {
+								while (!(Player.get(CP).colorMatch(TopCard))) {
+									TopCard.setColorWild(TopCard.getColor());
 								}
 							}
 						}
-					} // end of Optional: Home-Rule - Stacking "2+" Cards
+						int d4p = CP;
+						// Rotation of Player's Turns
+						if (TurnRotation % 2 == 0) {
+							CP--;
+						} else {
+							CP++;
+						}
+						// Looping Players
+						if (CP > (PN - 1)) {
+							CP = 0;
+						} else if (CP < 0) {
+							CP = (PN - 1);
+						}
 						// Drawing Cards
-					if (HP == true && CP == HN) {
-						System.out.println(name + " has to draws " + dn + " Cards.");
-					} else {
-						System.out.println("Player " + (CP + 1) + " has to draws " + dn + " Cards.");
-					}
-					for (int i = 0; i < dn; i++) {
 						if (HP == true && CP == HN) {
-							System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
-						} else if (HP == true) {
-							System.out.println("Player " + (CP + 1) + " drew a Card.");
-							Player.get(CP).draw(k.cardDeal());
+							System.out.println("You now have to draw 4 Cards.");
 						} else {
-							System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
+							System.out.println("Player " + (CP + 1) + " now has to draw 4 Cards.");
 						}
-						// Reset Draw Pile
-						if (k.isEmpty() == true) {
-							System.out.println("*Resetting Draw Pile*");
-							while (!(Discard.isEmpty())) {
-								Card q = Discard.cardDeal();
-								if (q.getRank().equals("Wild") || q.getRank().equals("4+")) {
-									q.resetWild(q.getColor());
-								}
-								k.addDeck(q);
-							}
-							k.shuffle();
-						}
-					}
-					D2p++;
-				}
-				// Wild Card
-				else if (TopCard.getRank().equals("Wild")) {
-					if (HP == true && CP == HN) {
-						// Selecting New Color
-						int nc;
-						System.out.println("Select a Color");
-						System.out.println("Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
-						nc = kb.nextInt();
-						while (!(nc == 0 || nc == 1 || nc == 2 || nc == 3)) {
-							System.out.println("Please select a vaild option");
-							System.out.println(
-									"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
-							nc = kb.nextInt();
-						}
-						TopCard.setColor(TopCard.getColor(), nc);
-						// Displaying New Color
-						if (TopCard.getColor().equals("R")) {
-							System.out.println(name + " chooses Red.");
-						} else if (TopCard.getColor().equals("B")) {
-							System.out.println(name + " chooses Blue.");
-						} else if (TopCard.getColor().equals("G")) {
-							System.out.println(name + " chooses Green.");
-						} else if (TopCard.getColor().equals("Y")) {
-							System.out.println(name + " chooses Yellow.");
-						}
-					} else {
-						// Selecting New Color
-						TopCard.setColorWild(TopCard.getColor());
-						if (Player.get(CP).hasColor()) {
-							while (!(Player.get(CP).colorMatch(TopCard))) {
-								TopCard.setColorWild(TopCard.getColor());
+						for (int i = 0; i < 4; i++) {
+							if (HP == true && CP == HN) {
+								System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
+							} else if (HP == true) {
+								System.out.println("Player " + (CP + 1) + " drew a Card.");
+								Player.get(CP).draw(k.cardDeal());
+							} else {
+								System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
 							}
 						}
-						// Displaying New Color
-						if (TopCard.getColor().equals("R")) {
-							System.out.println("Player " + (CP + 1) + " chooses Red.");
-						} else if (TopCard.getColor().equals("B")) {
-							System.out.println("Player " + (CP + 1) + " chooses Blue.");
-						} else if (TopCard.getColor().equals("G")) {
-							System.out.println("Player " + (CP + 1) + " chooses Green.");
-						} else if (TopCard.getColor().equals("Y")) {
-							System.out.println("Player " + (CP + 1) + " chooses Yellow.");
-						}
-					}
-					Wp++;
-				}
-				// Draw 4+ Wild Card
-				else if (TopCard.getRank().equals("4+")) {
-					if (HP == true && CP == HN) {
-						// Selecting New Color
-						int nc;
-						System.out.println("Select a Color");
-						System.out.println("Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
-						nc = kb.nextInt();
-						while (!(nc == 0 || nc == 1 || nc == 2 || nc == 3)) {
-							System.out.println("Please select a vaild option");
-							System.out.println(
-									"Enter 0 for Red\nEnter 1 for Blue\nEnter 2 for Green\nEnter 3 for Yellow");
-							nc = kb.nextInt();
-						}
-						TopCard.setColor(TopCard.getColor(), nc);
-					} else {
-						// Selecting New Color
-						TopCard.setColorWild(TopCard.getColor());
-						if (Player.get(CP).hasColor()) {
-							while (!(Player.get(CP).colorMatch(TopCard))) {
-								TopCard.setColorWild(TopCard.getColor());
+						if (HP == true && d4p == HN) {
+							// Displaying New Color
+							if (TopCard.getColor().equals("R")) {
+								System.out.println(name + " chooses Red.");
+							} else if (TopCard.getColor().equals("B")) {
+								System.out.println(name + " chooses Blue.");
+							} else if (TopCard.getColor().equals("G")) {
+								System.out.println(name + " chooses Green.");
+							} else if (TopCard.getColor().equals("Y")) {
+								System.out.println(name + " chooses Yellow.");
 							}
-						}
-					}
-					int d4p = CP;
-					// Rotation of Player's Turns
-					if (TurnRotation % 2 == 0) {
-						CP--;
-					} else {
-						CP++;
-					}
-					// Looping Players
-					if (CP > (PN - 1)) {
-						CP = 0;
-					} else if (CP < 0) {
-						CP = (PN - 1);
-					}
-					// Drawing Cards
-					if (HP == true && CP == HN) {
-						System.out.println("You now have to draw 4 Cards.");
-					} else {
-						System.out.println("Player " + (CP + 1) + " now has to draw 4 Cards.");
-					}
-					for (int i = 0; i < 4; i++) {
-						if (HP == true && CP == HN) {
-							System.out.println("You drew " + Player.get(CP).draw(k.cardDeal()));
-						} else if (HP == true) {
-							System.out.println("Player " + (CP + 1) + " drew a Card.");
-							Player.get(CP).draw(k.cardDeal());
 						} else {
-							System.out.println("Player " + (CP + 1) + " drew " + Player.get(CP).draw(k.cardDeal()));
+							// Displaying New Color
+							if (TopCard.getColor().equals("R")) {
+								System.out.println("Player " + (d4p + 1) + " chooses Red.");
+							} else if (TopCard.getColor().equals("B")) {
+								System.out.println("Player " + (d4p + 1) + " chooses Blue.");
+							} else if (TopCard.getColor().equals("G")) {
+								System.out.println("Player " + (d4p + 1) + " chooses Green.");
+							} else if (TopCard.getColor().equals("Y")) {
+								System.out.println("Player " + (d4p + 1) + " chooses Yellow.");
+							}
 						}
+						D4p++;
 					}
-					if (HP == true && d4p == HN) {
-						// Displaying New Color
-						if (TopCard.getColor().equals("R")) {
-							System.out.println(name + " chooses Red.");
-						} else if (TopCard.getColor().equals("B")) {
-							System.out.println(name + " chooses Blue.");
-						} else if (TopCard.getColor().equals("G")) {
-							System.out.println(name + " chooses Green.");
-						} else if (TopCard.getColor().equals("Y")) {
-							System.out.println(name + " chooses Yellow.");
-						}
-					} else {
-						// Displaying New Color
-						if (TopCard.getColor().equals("R")) {
-							System.out.println("Player " + (d4p + 1) + " chooses Red.");
-						} else if (TopCard.getColor().equals("B")) {
-							System.out.println("Player " + (d4p + 1) + " chooses Blue.");
-						} else if (TopCard.getColor().equals("G")) {
-							System.out.println("Player " + (d4p + 1) + " chooses Green.");
-						} else if (TopCard.getColor().equals("Y")) {
-							System.out.println("Player " + (d4p + 1) + " chooses Yellow.");
-						}
-					}
-					D4p++;
-				}
-			} else {
-				if (HP == true && CP == HN) {
-					System.out.println("You could not play any Cards.");
 				} else {
-					System.out.println("Player " + (CP + 1) + " could not play.");
-				}
-				Turns[CP] += 1;
-			} // end of Player has match
-			System.out.println();
-			// Reset Draw Pile
-			if (k.getSize() < 7) {
-				System.out.println("*Resetting Draw Pile*");
-				int ps = k.getSize();
-				while (!(Discard.isEmpty())) {
-					Card q = Discard.cardDeal();
-					if (q.getRank().equals("Wild") || q.getRank().equals("4+")) {
-						q.resetWild(q.getColor());
+					if (HP == true && CP == HN) {
+						System.out.println("You could not play any Cards.");
+					} else {
+						System.out.println("Player " + (CP + 1) + " could not play.");
 					}
-					k.addDeck(q);
+					Turns[CP] += 1;
+				} // end of Player has match
+				System.out.println();
+				// Reset Draw Pile
+				if (k.getSize() < 7) {
+					System.out.println("*Resetting Draw Pile*");
+					System.out.println();
+					int ps = k.getSize();
+					while (!(Discard.isEmpty())) {
+						Card q = Discard.cardDeal();
+						if (q.getRank().equals("Wild") || q.getRank().equals("4+")) {
+							q.resetWild(q.getColor());
+						}
+						k.addDeck(q);
+					}
+					k.partialShuffle(ps);
 				}
-				k.partialShuffle(ps);
-			}
-			// Checking for a Winner
+				// Checking for a Winner
+				for (int i = 0; i < PN; i++) {
+					if (Player.get(i).isEmpty() == true) {
+						if (HP == true && i == HN) {
+							System.out.println("You have played your last Card.");
+						} else {
+							System.out.println("Player " + (i + 1) + " has played their last Card.");
+						}
+						System.out.println();
+						winner = true;
+					}
+				}
+				if (HP == true && winner == true) {
+					System.out.println("Enter anything to go to the Result Screen.");
+					con = kb.next();
+				} else if (HP == true) {
+					System.out.println("Enter anything to start the next turn.");
+					con = kb.next();
+				}
+			} // end of gameplay loop
+				// Ending
+				// Displaying Winner and Points earned
+			int tp = 0;
+			int tc = 0;
 			for (int i = 0; i < PN; i++) {
 				if (Player.get(i).isEmpty() == true) {
 					if (HP == true && i == HN) {
-						System.out.println("You have played your last Card.");
+						System.out.println(name + " has Won");
 					} else {
-						System.out.println("Player " + (i + 1) + " has played their last Card.");
+						System.out.println("Player " + (i + 1) + " has Won");
 					}
-					System.out.println();
-					winner = true;
-				}
-			}
-			if (HP == true && winner == true) {
-				System.out.println("Enter anything to go to the Result Screen.");
-				con = kb.next();
-			} else if (HP == true) {
-				System.out.println("Enter anything to start the next turn.");
-				con = kb.next();
-			}
-		} // end of gameplay loop
-			// Ending
-			// Displaying Winner and Points earned
-		kb.close();
-		int tp = 0;
-		int tc = 0;
-		for (int i = 0; i < PN; i++) {
-			if (Player.get(i).isEmpty() == true) {
-				if (HP == true && i == HN) {
-					System.out.println(name + " has Won");
+					tc = Turns[i];
 				} else {
-					System.out.println("Player " + (i + 1) + " has Won");
+					tp += Player.get(i).tallyPoints();
 				}
-				tc = Turns[i];
-			} else {
-				tp += Player.get(i).tallyPoints();
 			}
-		}
-		System.out.println("with " + tp + " Points");
-		System.out.println("and played " + tc + " times.");
-		System.out.println();
-		System.out.println("Total Turns Players Played: " + TTC);
-		System.out.println("Total Number of Skips Played: " + SKp);
-		System.out.println("Total Number of Reverses Played: " + RVp);
-		System.out.println("Total Number of Draw 2s Played: " + D2p);
-		System.out.println("Total Number of Wilds Played: " + Wp);
-		System.out.println("Total Number of Wild Draw 4s Played: " + D4p);
+			System.out.println("with " + tp + " Points");
+			System.out.println("and had " + tc + " turns.");
+			System.out.println();
+			System.out.println("Total Turns Players Played: " + TTC);
+			System.out.println("Total Number of Skips Played: " + SKp);
+			System.out.println("Total Number of Reverses Played: " + RVp);
+			System.out.println("Total Number of Draw 2s Played: " + D2p);
+			System.out.println("Total Number of Wilds Played: " + Wp);
+			System.out.println("Total Number of Wild Draw 4s Played: " + D4p);
+			System.out.println("Enter anything to continue.");
+			con = kb.next();
+			int NG;
+			System.out.println("- New Game -");
+			System.out.println("Would you like to start a new game?");
+			System.out.println("Enter 0 for Yes\nEnter 1 for No");
+			NG = kb.nextInt();
+			while (!(NG == 0 || NG == 1)) {
+				System.out.println("Please select a vaild option");
+				System.out.println("Enter 0 for Yes\nEnter 1 for No");
+				NG = kb.nextInt();
+			}
+			if (NG == 0) {
+				Reset = true;
+			} else if (NG == 1) {
+				Reset = false;
+			}
+		} // end of reset
+		kb.close();
+		System.out.println("You have reached the end of UNO.");
 	} // end of main
 
 }
